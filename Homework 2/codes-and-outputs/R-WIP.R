@@ -1,9 +1,8 @@
-library('tidyverse')
+library(tidyverse)
 library(rstudioapi)
 library(plyr)
 library(readr)
 library(stringr)
-library(hash)
 
 #mark current directory
 cur_dir = dirname(getSourceEditorContext()$path)
