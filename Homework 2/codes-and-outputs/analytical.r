@@ -218,5 +218,6 @@ temp = temp %>%
 
 df = merge(df, temp, by = "account_id", all.x = TRUE)
 
+str(df)
 
 write.csv(loans, file = "../codes-and-outputs/analytical_r.csv")

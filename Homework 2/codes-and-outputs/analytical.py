@@ -3,6 +3,10 @@ import numpy as np
 import os
 import glob
 
+full_path = os.path.realpath(__file__)
+
+path, filename = os.path.split(full_path)
+os.chdir(path)
 os.chdir('../data')
 
 path = os.getcwd() #current working directory
@@ -21,6 +25,10 @@ for i, file_name in enumerate(files):
 
 for i,x in enumerate(name):
     vars()[x] = pd.DataFrame(d[x])
+
+#checking for missing values --> none
+for i in range(len(accounts.columns)):
+    print((accounts.columns[i], sum(accounts.iloc[:,i].isna())) if sum(accounts.iloc[:,i].isna()) != 0 else "")
 
 accounts['date'] = pd.to_datetime(accounts['date'])
 
@@ -70,8 +78,6 @@ df = accounts.merge(districts, left_on = "district_id", right_on = "id", how = "
 df = df.rename(columns = {'name': 'district_name'})
 
 df = df[['account_id', 'district_name', 'open_date', 'statement_frequency']]
-
-##### links
 
 temp = pd.DataFrame(links.groupby("account_id")['client_id'].count())
 temp = temp.rename(columns = {"client_id": "num_customers"})
@@ -135,7 +141,6 @@ loans = loans.drop(loans.columns[5:25], axis =1)
 #change to correct datatype
 loans['date'] = pd.to_datetime(loans['date'])
 
-
 temp = pd.DataFrame.copy(df)
 loans = loans.rename(columns = {"account_id": "account"})
 temp = temp.merge(loans, left_on="account_id", right_on= "account", how = "left")
@@ -168,9 +173,6 @@ for i in range(0,len(temp)):
 
 df = temp[["account_id", "district_name","open_date", "statement_frequency", "num_customers", "credit_cards", "loan", "loan_amount",
             "loan_payments", "loan_term", "loan_status", "loan_default"]]
-
-
-#transactions
 
 xx =transactions[transactions['type'] =="debit"]
 xx =xx[xx['method'] == "cash"]
@@ -226,4 +228,4 @@ df = df.merge(min, left_on="account_id", right_on="account", how = "left")
 df = df.drop("account", axis = 1)
 
 os.chdir('../codes-and-outputs')
-districts.to_csv(os.getcwd()+ "/analytical_py.csv",index = False, header = True)
+df.to_csv(os.getcwd()+ "/analytical_py.csv",index = False, header = True)

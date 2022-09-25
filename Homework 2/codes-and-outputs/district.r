@@ -54,4 +54,4 @@ for(i in c(9:16)){
 districts[is.na(districts$crime95),"crime95"] <- median(districts$crime95, na.rm = T)
 districts[is.na(districts$unemployment95),"unemployment95"] <- median(districts$unemployment95, na.rm = T)
 
-write.csv(loans, file = "../codes-and-outputs/district.csv")
+write.csv(districts, file = "../codes-and-outputs/district_r.csv")

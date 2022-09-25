@@ -1,4 +1,4 @@
-library('tidyverse')
+library(tidyverse)
 library(rstudioapi)
 library(plyr)
 library(readr)
@@ -48,4 +48,4 @@ for(i in c(1:nrow(loans))){
 #drop pre-existing loans columns
 loans[,6:25] = NULL
 
-write.csv(loans, file = "../codes-and-outputs/loans.csv")
+write.csv(loans, file = "../codes-and-outputs/loans_r.csv")
