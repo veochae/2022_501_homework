@@ -3,6 +3,9 @@ import numpy as np
 import os
 import glob
 
+full_path = os.path.realpath(__file__)
+path, filename = os.path.split(full_path)
+os.chdir(path)
 os.chdir('../data')
 
 path = os.getcwd() #current working directory
@@ -65,4 +68,4 @@ districts['crime95']= districts['crime95'].fillna(districts['crime95'].median())
 districts['unemployment95']= districts['unemployment95'].fillna(districts['unemployment95'].median())    
 
 os.chdir('../codes-and-outputs')
-districts.to_csv(os.getcwd()+ "/district.csv",index = False, header = True)
+districts.to_csv(os.getcwd()+ "/district_py.csv",index = False, header = True)

@@ -2,7 +2,11 @@ import pandas as pd
 import numpy as np
 import os
 import glob
+from pathlib import Path
 
+full_path = os.path.realpath(__file__)
+path, filename = os.path.split(full_path)
+os.chdir(path)
 os.chdir('../data')
 
 path = os.getcwd() #current working directory
@@ -58,4 +62,4 @@ loans['date'] = pd.to_datetime(loans['date'])
 
 #export
 os.chdir('../codes-and-outputs')
-districts.to_csv(os.getcwd()+ "/loans.csv",index = False, header = True)
+loans.to_csv(os.getcwd()+ "/loans_py.csv",index = False, header = True)
